@@ -1,4 +1,5 @@
-﻿using System;
+﻿using D2RMulti;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -137,6 +138,21 @@ namespace D2RMng
 
             {
                 instance.cbArea.Text = comboBox1.Text;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            HandleHandler.FindAndDeleteHandler();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            HandleHandler.KillAllD2R();
+            foreach (D2RInstance instance in D2RInstances)
+            {
+                instance.LaunchD2R(sender, e);
+                System.Threading.Thread.Sleep(1000);
             }
         }
     }

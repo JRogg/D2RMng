@@ -19,6 +19,16 @@ namespace D2RMulti
             }
             return false;
         }
+        public static bool KillAllD2R()        
+        {
+            Process[] allD2R = Process.GetProcessesByName("D2R");
+            foreach (Process singleD2r in allD2R)
+            {
+                singleD2r.Kill();
+            }
+            return false;
+        }
+
         private static bool FindAndDeleteHandle(int d2rID)
         {            // Start the child process.
             Process p = new Process();
