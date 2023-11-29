@@ -1,4 +1,5 @@
-﻿using System;
+﻿using D2RMng;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -12,7 +13,7 @@ namespace D2RMulti
 {
     internal class D2RHandler
     {
-        public static bool startInstanceToken(string Path, string token, out string error)
+        /* public static bool startInstanceToken(string Path, string token, out string error)
         {
             string command ="\"" + Path +  "\"" + " - NoProfile - ExecutionPolicy Bypass" + "\"-uid osi\"";
             var processStartInfo = new ProcessStartInfo();
@@ -29,7 +30,7 @@ namespace D2RMulti
 
             return true;
 
-          /*
+         
             error = "xx";
             Process d2r = new Process();
             d2r.StartInfo.FileName = @Path;
@@ -37,9 +38,12 @@ namespace D2RMulti
         
             d2r.StartInfo.Verb = "runas";
             d2r.Start();
-            return false;*/
-        }
-        public static bool startInstance(string Path, string User, string Password, string Area, bool Filter, out string error)
+            return false;
+        
+         }
+       */
+    
+    public static bool startInstance(string Path, string User, string Password, string Area, bool Filter, out string error)
         {
             error = "";
             if (!File.Exists(Path)) {
@@ -50,11 +54,12 @@ namespace D2RMulti
             {
                 error = "Data missing";
                 return false;
-            } 
+            }
+            
             HandleHandler.FindAndDeleteHandler();
             Process d2r = new Process();
             d2r.StartInfo.FileName = @Path; 
-            d2r.StartInfo.Arguments = @"/c -username " + User +" -password " + Password + " -address " + Area + ".actual.battle.net";
+            d2r.StartInfo.Arguments = @"/c -username " + User +" -password " + PWHelper.Decrypt(Password) + " -address " + Area + ".actual.battle.net";
             if (Filter) {
                 d2r.StartInfo.Arguments += " -mod Filter - txt";
             }

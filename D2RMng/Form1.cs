@@ -151,8 +151,9 @@ namespace D2RMng
             HandleHandler.KillAllD2R();
             foreach (D2RInstance instance in D2RInstances)
             {
+                System.Threading.Thread.Sleep(1500);
                 instance.LaunchD2R(sender, e);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(1500);
             }
         }
     }

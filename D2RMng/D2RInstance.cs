@@ -17,8 +17,9 @@ namespace D2RMng
       
         public ComboBox cbArea = new ComboBox();
         public event EventHandler DeleteMe;
-
+        private string PWEncrypted;
         private Button btnLaunch;
+        private Button btnSavePW;
         private Button btnDelete; 
         private TextBox tbName;
         private TextBox tbPath;
@@ -44,20 +45,22 @@ namespace D2RMng
                 { ischecked = "False"; }
             return tbName.Text + "," +
                  tbUser.Text + "," +
-                  tbPW.Text + "," +
+                  PWEncrypted + "," +
                    tbPath.Text + "," +
                     cbArea.Text + "," + ischecked;
             
         }
         public void Init(string values)
         {
+            btnSavePW.Enabled = false;
             string[] listvalues = values.Split(
                   new string[] { "," },
                   StringSplitOptions.None
               );
             tbName.Text = listvalues[0];
             tbUser.Text = listvalues[1];
-            tbPW.Text = listvalues[2];
+            tbPW.Text = "**********************";
+            PWEncrypted = listvalues[2]; 
             tbPath.Text = listvalues[3];
             cbArea.Text = listvalues[4];
             if (listvalues.Count() >= 6)
@@ -67,7 +70,7 @@ namespace D2RMng
         {
             HandleHandler.FindAndDeleteHandler();
             string error;
-            if (D2RHandler.startInstance(tbPath.Text, tbUser.Text, tbPW.Text, cbArea.Text, cbFilter.Checked, out error))
+            if (D2RHandler.startInstance(tbPath.Text, tbUser.Text, PWEncrypted, cbArea.Text, cbFilter.Checked, out error))
             {
               
                 ErrorLabel.Text = ""; 
@@ -76,7 +79,7 @@ namespace D2RMng
                 ErrorLabel.Text = error;
             }
         }
-
+        /*
         private void LaunchD2RToken(object sender, EventArgs e)
         {
             HandleHandler.FindAndDeleteHandler();
@@ -92,7 +95,7 @@ namespace D2RMng
                 ErrorLabel.Text = error;
             }
         }
-
+        */
         private void DeleteMyself(object sender, EventArgs e)
         {
             DeleteMe?.Invoke(this, EventArgs.Empty);      
@@ -114,6 +117,16 @@ namespace D2RMng
             btnLaunch.Height = 45;
             btnLaunch.Text = "Start";
             btnLaunch.Click += new System.EventHandler(LaunchD2R);
+
+
+            btnSavePW = new Button();
+            btnSavePW.Parent = instancePanel;
+            btnSavePW.Left = 405;
+            btnSavePW.Top = 0;
+            btnSavePW.Height = 25;
+            btnSavePW.Width = 73;
+            btnSavePW.Text = "Encrypt PW";
+            btnSavePW.Click += new System.EventHandler(EncryptPW);
 
 
             btnDelete = new Button();
@@ -149,7 +162,7 @@ namespace D2RMng
 
             Namelabel.Location = new System.Drawing.Point(105, 0);
             Userlabel.Location = new System.Drawing.Point(225, 0);
-            PWlabel.Location = new System.Drawing.Point(355, 0);
+            PWlabel.Location = new System.Drawing.Point(355, 0); 
             Pathlabel.Location = new System.Drawing.Point(475, 0);
             Arealabel.Location = new System.Drawing.Point(600, 0);
             Filterlabel.Location = new System.Drawing.Point(750, 0);
@@ -193,14 +206,15 @@ namespace D2RMng
             cbFilter.Parent = instancePanel;
             cbFilter.Checked = false;
             cbFilter.Location = new System.Drawing.Point(750, 25);
+ 
 
-            btnLaunch = new Button();
-            btnLaunch.Parent = instancePanel;
-            btnLaunch.Left = 900;
-            btnLaunch.Top = 5;
-            btnLaunch.Height = 45;
-            btnLaunch.Text = "Start";
-            btnLaunch.Click += new System.EventHandler(LaunchD2RToken);
+        }
+
+        private void EncryptPW(object sender, EventArgs e)
+        {
+            PWEncrypted = PWHelper.Encrypt(tbPW.Text);
+            tbPW.Text = "**********************";
+            btnSavePW.Enabled = false;
 
         }
     }
