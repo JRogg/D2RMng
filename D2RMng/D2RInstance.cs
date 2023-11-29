@@ -24,6 +24,7 @@ namespace D2RMng
         private TextBox tbPath;
         private TextBox tbUser;
         private TextBox tbPW;
+        private CheckBox cbFilter;
 
         private Label ErrorLabel; 
 
@@ -36,11 +37,17 @@ namespace D2RMng
 
         public string GetSaveTxt()
         {
+            string ischecked;
+            if (cbFilter.Checked)
+                { ischecked = "True"; }
+            else
+                { ischecked = "False"; }
             return tbName.Text + "," +
                  tbUser.Text + "," +
                   tbPW.Text + "," +
                    tbPath.Text + "," +
-                    cbArea.Text;
+                    cbArea.Text + "," + ischecked;
+            
         }
         public void Init(string values)
         {
@@ -49,16 +56,18 @@ namespace D2RMng
                   StringSplitOptions.None
               );
             tbName.Text = listvalues[0];
-            tbUser.Text = listvalues[1];    
-            tbPW.Text = listvalues[2];  
+            tbUser.Text = listvalues[1];
+            tbPW.Text = listvalues[2];
             tbPath.Text = listvalues[3];
-            cbArea.Text = listvalues[4];    
+            cbArea.Text = listvalues[4];
+            if (listvalues.Count() >= 6)
+            { cbFilter.Checked = listvalues[5] == "True";  } else { cbFilter.Checked = false; } 
         }
-        private void LaunchD2R(object sender, EventArgs e)
+        public void LaunchD2R(object sender, EventArgs e)
         {
             HandleHandler.FindAndDeleteHandler();
             string error;
-            if (D2RHandler.startInstance(tbPath.Text, tbUser.Text, tbPW.Text, cbArea.Text, out error))
+            if (D2RHandler.startInstance(tbPath.Text, tbUser.Text, tbPW.Text, cbArea.Text, cbFilter.Checked, out error))
             {
               
                 ErrorLabel.Text = ""; 
@@ -67,6 +76,23 @@ namespace D2RMng
                 ErrorLabel.Text = error;
             }
         }
+
+        private void LaunchD2RToken(object sender, EventArgs e)
+        {
+            HandleHandler.FindAndDeleteHandler();
+            string error;
+            string testvartoken = "US-6f75b5e286a9958f989a750ca835f5f3-486434754&flowTrackingId=c96f3456-6d11-43ca-a732-207d9fce337c";
+            if (D2RHandler.startInstanceToken(tbPath.Text, testvartoken, out error))
+            {
+
+                ErrorLabel.Text = "";
+            }
+            else
+            {
+                ErrorLabel.Text = error;
+            }
+        }
+
         private void DeleteMyself(object sender, EventArgs e)
         {
             DeleteMe?.Invoke(this, EventArgs.Empty);      
@@ -92,7 +118,7 @@ namespace D2RMng
 
             btnDelete = new Button();
             btnDelete.Parent = instancePanel;
-            btnDelete.Left = 750;
+            btnDelete.Left = 750 + btnDelete.Width;
             btnDelete.Top = 5;
             btnDelete.Height = 45;
             btnDelete.Text = "Remove";
@@ -103,12 +129,15 @@ namespace D2RMng
             Label PWlabel = new Label();
             Label Pathlabel = new Label();
             Label Arealabel = new Label();
+            Label Filterlabel = new Label();
+            CheckBox Filter = new CheckBox();
 
             Namelabel.Text = "Name:";
             Userlabel.Text = "User/Mail:";
             PWlabel.Text = "Password:";
             Pathlabel.Text = "Path:";
             Arealabel.Text = "Area:";
+            Filterlabel.Text = "Filter?";
 
             Namelabel.Parent = instancePanel;
             ErrorLabel.Parent = instancePanel;
@@ -116,12 +145,14 @@ namespace D2RMng
             PWlabel.Parent = instancePanel;
             Pathlabel.Parent = instancePanel;
             Arealabel.Parent = instancePanel;
+            Filterlabel.Parent = instancePanel; 
 
             Namelabel.Location = new System.Drawing.Point(105, 0);
             Userlabel.Location = new System.Drawing.Point(225, 0);
             PWlabel.Location = new System.Drawing.Point(355, 0);
             Pathlabel.Location = new System.Drawing.Point(475, 0);
             Arealabel.Location = new System.Drawing.Point(600, 0);
+            Filterlabel.Location = new System.Drawing.Point(750, 0);
             ErrorLabel.Location = new System.Drawing.Point(900, 0);
             Pathlabel.Width = 110;
 
@@ -157,6 +188,19 @@ namespace D2RMng
             tbPath.Parent = instancePanel;
             tbPath.Text = @"Path:x:\xx\xx\d2r.exe";
             tbPath.Location = new System.Drawing.Point(475, 25);
+
+            cbFilter = new CheckBox();
+            cbFilter.Parent = instancePanel;
+            cbFilter.Checked = false;
+            cbFilter.Location = new System.Drawing.Point(750, 25);
+
+            btnLaunch = new Button();
+            btnLaunch.Parent = instancePanel;
+            btnLaunch.Left = 900;
+            btnLaunch.Top = 5;
+            btnLaunch.Height = 45;
+            btnLaunch.Text = "Start";
+            btnLaunch.Click += new System.EventHandler(LaunchD2RToken);
 
         }
     }
