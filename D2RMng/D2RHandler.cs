@@ -65,7 +65,7 @@ namespace D2RMulti
             }
             d2r.StartInfo.Verb = "runas";
             d2r.Start();
-            return false;
+            return true;
         }
 
     }

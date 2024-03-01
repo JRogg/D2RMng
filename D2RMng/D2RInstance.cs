@@ -27,7 +27,8 @@ namespace D2RMng
         private TextBox tbPW;
         private CheckBox cbFilter;
 
-        private Label ErrorLabel; 
+        private Label ErrorLabel;
+        private Label CurArealabel;
 
 
         public D2RInstance()
@@ -72,7 +73,7 @@ namespace D2RMng
             string error;
             if (D2RHandler.startInstance(tbPath.Text, tbUser.Text, PWEncrypted, cbArea.Text, cbFilter.Checked, out error))
             {
-              
+                CurArealabel.Text = "Now on: " + cbArea.Text;
                 ErrorLabel.Text = ""; 
             } else
             {
@@ -104,7 +105,11 @@ namespace D2RMng
         private void CreateGUIObjects()
         {
              
-            ErrorLabel = new Label();   
+            ErrorLabel = new Label();
+
+            CurArealabel = new Label();
+
+
             instancePanel.BackColor = System.Drawing.Color.DarkGray;
             instancePanel.Height = 55;
             instancePanel.Width = 1100;
@@ -141,7 +146,7 @@ namespace D2RMng
             Label Userlabel = new Label();
             Label PWlabel = new Label();
             Label Pathlabel = new Label();
-            Label Arealabel = new Label();
+            Label Arealabel = new Label(); 
             Label Filterlabel = new Label();
             CheckBox Filter = new CheckBox();
 
@@ -150,7 +155,7 @@ namespace D2RMng
             PWlabel.Text = "Password:";
             Pathlabel.Text = "Path:";
             Arealabel.Text = "Area:";
-            Filterlabel.Text = "Filter?";
+            Filterlabel.Text = "Filter?"; 
 
             Namelabel.Parent = instancePanel;
             ErrorLabel.Parent = instancePanel;
@@ -158,13 +163,20 @@ namespace D2RMng
             PWlabel.Parent = instancePanel;
             Pathlabel.Parent = instancePanel;
             Arealabel.Parent = instancePanel;
-            Filterlabel.Parent = instancePanel; 
+            Filterlabel.Parent = instancePanel;
+            CurArealabel.Parent = instancePanel;
+            
+
 
             Namelabel.Location = new System.Drawing.Point(105, 0);
             Userlabel.Location = new System.Drawing.Point(225, 0);
             PWlabel.Location = new System.Drawing.Point(355, 0); 
             Pathlabel.Location = new System.Drawing.Point(475, 0);
             Arealabel.Location = new System.Drawing.Point(600, 0);
+            Arealabel.Width = 40;
+
+            CurArealabel.Location = new System.Drawing.Point(650, 0);
+            
             Filterlabel.Location = new System.Drawing.Point(750, 0);
             ErrorLabel.Location = new System.Drawing.Point(900, 0);
             Pathlabel.Width = 110;
