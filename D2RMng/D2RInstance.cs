@@ -74,8 +74,7 @@ namespace D2RMng
             if (D2RHandler.startInstance(tbPath.Text, tbUser.Text, PWEncrypted, cbArea.Text, cbFilter.Checked, out error))
             {
                 CurArealabel.Text = "Now on: " + cbArea.Text;
-                ErrorLabel.Text = "";
-               // MessageBox.Show(tbUser.Text + " pw: " + PWHelper.Decrypt(PWEncrypted));
+                ErrorLabel.Text = ""; 
             } else
             {
                 ErrorLabel.Text = error;
