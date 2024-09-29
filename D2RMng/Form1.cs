@@ -156,5 +156,10 @@ namespace D2RMng
                 System.Threading.Thread.Sleep(1500);
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            HandleHandler.KillAllD2R();
+        }
     }
 }
