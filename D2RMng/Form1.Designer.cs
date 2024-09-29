@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -36,13 +38,13 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.pnlMain = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.pnlTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlTop
             // 
+            this.pnlTop.Controls.Add(this.button7);
             this.pnlTop.Controls.Add(this.button6);
             this.pnlTop.Controls.Add(this.button5);
             this.pnlTop.Controls.Add(this.label1);
@@ -55,8 +57,30 @@
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
             this.pnlTop.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(1180, 79);
+            this.pnlTop.Size = new System.Drawing.Size(1437, 79);
             this.pnlTop.TabIndex = 0;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(1232, 19);
+            this.button6.Margin = new System.Windows.Forms.Padding(2);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(105, 46);
+            this.button6.TabIndex = 8;
+            this.button6.Text = "MassRe";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(1089, 19);
+            this.button5.Margin = new System.Windows.Forms.Padding(2);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(130, 46);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "Kill Handle";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // label1
             // 
@@ -133,36 +157,25 @@
             this.pnlMain.Location = new System.Drawing.Point(0, 79);
             this.pnlMain.Margin = new System.Windows.Forms.Padding(2);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1180, 460);
+            this.pnlMain.Size = new System.Drawing.Size(1437, 460);
             this.pnlMain.TabIndex = 1;
             // 
-            // button5
+            // button7
             // 
-            this.button5.Location = new System.Drawing.Point(1073, 20);
-            this.button5.Margin = new System.Windows.Forms.Padding(2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(130, 46);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Kill Handle";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(952, 20);
-            this.button6.Margin = new System.Windows.Forms.Padding(2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(105, 46);
-            this.button6.TabIndex = 8;
-            this.button6.Text = "MassRe";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button7.Location = new System.Drawing.Point(961, 19);
+            this.button7.Margin = new System.Windows.Forms.Padding(2);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(108, 46);
+            this.button7.TabIndex = 9;
+            this.button7.Text = "Kill d2r";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 539);
+            this.ClientSize = new System.Drawing.Size(1437, 539);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.pnlTop);
             this.Margin = new System.Windows.Forms.Padding(2);
@@ -186,6 +199,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
     }
 }
 
