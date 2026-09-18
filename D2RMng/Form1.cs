@@ -161,5 +161,12 @@ namespace D2RMng
         {
             HandleHandler.KillAllD2R();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked) {
+                HandleHandler.FindAndDeleteHandler();
+            }
+        }
     }
 }

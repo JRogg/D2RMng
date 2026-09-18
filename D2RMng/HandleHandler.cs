@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace D2RMulti
 {
@@ -14,10 +15,9 @@ namespace D2RMulti
             Process[] allD2R = Process.GetProcessesByName("D2R");
             foreach (Process singleD2r in allD2R)
             {
-              if (FindAndDeleteHandle(singleD2r.Id))
-                    return true;
+                FindAndDeleteHandle(singleD2r.Id);                 
             }
-            return false;
+            return true;
         }
         public static bool KillAllD2R()        
         {
@@ -34,8 +34,10 @@ namespace D2RMulti
             Process p = new Process();
             // Redirect the output stream of the child process.
             p.StartInfo.UseShellExecute = false;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = @"/c handle -p " + d2rID.ToString() + " -a"; //handle -p D2R     notepad
             p.StartInfo.Verb = "runas";
@@ -66,6 +68,8 @@ namespace D2RMulti
             // Redirect the output stream of the child process.
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            p.StartInfo.CreateNoWindow = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = @"/c handle -p " + d2rID.ToString() + " -c " + adress.Trim(' ') + " -y";

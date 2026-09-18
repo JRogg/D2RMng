@@ -155,7 +155,7 @@ namespace D2RMng
             PWlabel.Text = "Password:";
             Pathlabel.Text = "Path:";
             Arealabel.Text = "Area:";
-            Filterlabel.Text = "Filter?"; 
+            Filterlabel.Text = "Extractor?"; 
 
             Namelabel.Parent = instancePanel;
             ErrorLabel.Parent = instancePanel;
